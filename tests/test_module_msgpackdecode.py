@@ -23,7 +23,7 @@
 #
 
 from wishbone.event import Event
-from wishbone.module.msgpackdecode import MSGPackDecode
+from wishbone_decode_msgpack import MSGPackDecode
 from wishbone.actor import ActorConfig
 from wishbone.utils.test import getter
 
