@@ -57,7 +57,7 @@ setup(
     name=PROJECT,
     version=VERSION,
 
-    description='A Wishbone to Convert MSGPack data into Python dict data structures.',
+    description='A Wishbone decode module to convert MSGPack data into Python dict data structures.',
     long_description=long_description,
 
     author='Jelle Smet',
