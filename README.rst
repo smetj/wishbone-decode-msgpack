@@ -13,7 +13,7 @@
     wishbone.decode.msgpack
     =======================
 
-    Version: 0.1.0
+    Version: 1.0.0
 
     Decodes MSGPack data into Python objects.
     -----------------------------------------
