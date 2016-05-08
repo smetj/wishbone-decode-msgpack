@@ -22,4 +22,4 @@
 #
 #
 
-from msgpackdecode import MSGPackDecode
+from .msgpackdecode import MSGPackDecode

@@ -37,7 +37,7 @@ def test_module_msgpackdecode():
     msgpackdecode.pool.queue.outbox.disableFallThrough()
     msgpackdecode.start()
 
-    e = Event('\x93\x01\x02\x03')
+    e = Event(b'\x93\x01\x02\x03')
 
     msgpackdecode.pool.queue.inbox.put(e)
     one = getter(msgpackdecode.pool.queue.outbox)

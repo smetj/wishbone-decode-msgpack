@@ -34,9 +34,11 @@ class MSGPackDecode(Actor):
 
     Parameters:
 
-        - complete(bool)(False)
-           |  When True encodes the complete event.  If False only
-           |  encodes the data part.
+        - source(str)('@data')
+           |  The location of the msgpack data to decode.
+
+        - destination(str)('@data')
+           |  The location to store the decoded data.
 
     Queues:
 
@@ -47,26 +49,14 @@ class MSGPackDecode(Actor):
            |  Outgoing messges
     '''
 
-    def __init__(self, actor_config, complete=False):
+    def __init__(self, actor_config, complete=False, source='@data', destination='@data'):
         Actor.__init__(self, actor_config)
 
         self.pool.createQueue("inbox")
         self.pool.createQueue("outbox")
         self.registerConsumer(self.consume, "inbox")
 
-    def preHook(self):
-        if self.kwargs.complete:
-            self.decode = self.__decodeComplete
-        else:
-            self.decode = self.__decodeData
-
     def consume(self, event):
-        event = self.decode(event)
+
+        event.set(msgpack.unpackb(event.get(self.kwargs.source)), self.kwargs.destination)
         self.submit(event, self.pool.queue.outbox)
-
-    def __decodeComplete(self, event):
-        return msgpack.unpackb(event.get())
-
-    def __decodeData(self, event):
-        event.set(msgpack.unpackb(event.get()))
-        return event
